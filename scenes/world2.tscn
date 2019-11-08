@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/jungleDirt.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/lvl_complete.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/fighter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=4]
+
+[node name="world2" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 131078, 0, 0, 131079, 2, 0, 196614, 6, 0, 196615, 8, 0, 262152, 0, 0, 262153, 2, 0, 262159, 0, 0, 262160, 1, 0, 262161, 1, 0, 262162, 1, 0, 262163, 2, 0, 327688, 6, 0, 327689, 8, 0, 327695, 3, 0, 327696, 4, 0, 327697, 4, 0, 327698, 4, 0, 327699, 5, 0, 393227, 0, 0, 393228, 2, 0, 393231, 3, 0, 393232, 4, 0, 393233, 4, 0, 393234, 4, 0, 393235, 5, 0, 458763, 6, 0, 458764, 8, 0, 458767, 3, 0, 458768, 4, 0, 458769, 4, 0, 458770, 4, 0, 458771, 5, 0, 524288, 0, 0, 524289, 1, 0, 524290, 2, 0, 524302, 0, 0, 524303, 4, 0, 524304, 4, 0, 524305, 4, 0, 524306, 4, 0, 524307, 5, 0, 589824, 3, 0, 589825, 4, 0, 589826, 5, 0, 589838, 3, 0, 589839, 4, 0, 589840, 4, 0, 589841, 4, 0, 589842, 4, 0, 589843, 5, 0, 655360, 3, 0, 655361, 4, 0, 655362, 5, 0, 655364, 0, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 2, 0, 655377, 4, 0, 655378, 4, 0, 655379, 5, 0, 720896, 3, 0, 720897, 4, 0, 720898, 5, 0, 720900, 3, 0, 720901, 4, 0, 720902, 4, 0, 720903, 4, 0, 720904, 4, 0, 720905, 4, 0, 720906, 4, 0, 720907, 4, 0, 720908, 4, 0, 720909, 4, 0, 720910, 4, 0, 720911, 4, 0, 720912, 5, 0, 720913, 4, 0, 720914, 4, 0, 720915, 5, 0 )
+
+[node name="lvl_complete" parent="." instance=ExtResource( 2 )]
+position = Vector2( 209.943, 47.4317 )
+next_world = "res://scenes/world1.tscn"
+
+[node name="lvl_complete2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 622.055, 111.97 )
+next_world = "res://scenes/world0.tscn"
+
+[node name="agujero" parent="." instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 164.067, 398.115 )
+scale = Vector2( 313.27, 1 )
+next_world = "res://scenes/world2.tscn"
+
+[node name="fighter" parent="." instance=ExtResource( 3 )]
+position = Vector2( 15.8348, 235.954 )
+
+[node name="enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 78.8748, 234.172 )

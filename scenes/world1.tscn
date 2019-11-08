@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/lvl_complete.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/jungleDirt.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/fighter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=4]
+
+[node name="world1" type="Node"]
+
+[node name="lvl_complete" parent="." instance=ExtResource( 1 )]
+position = Vector2( 68.3018, 80.2514 )
+next_world = "res://scenes/world2.tscn"
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 196609, 0, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 2, 0, 262145, 6, 0, 262146, 7, 0, 262147, 7, 0, 262148, 7, 0, 262149, 7, 0, 262150, 7, 0, 262151, 7, 0, 262152, 7, 0, 262153, 8, 0, 327693, 0, 0, 327694, 2, 0, 393229, 6, 0, 393230, 8, 0, 458769, 0, 0, 458770, 1, 0, 458771, 2, 0, 524305, 3, 0, 524306, 4, 0, 524307, 5, 0, 589824, 0, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 2, 0, 589837, 0, 0, 589838, 1, 0, 589839, 1, 0, 589840, 1, 0, 589841, 1, 0, 589842, 1, 0, 589843, 2, 0, 655360, 3, 0, 655361, 4, 0, 655362, 4, 0, 655363, 4, 0, 655364, 4, 0, 655365, 4, 0, 655366, 4, 0, 655367, 4, 0, 655368, 4, 0, 655369, 4, 0, 655370, 5, 0, 655373, 3, 0, 655374, 4, 0, 655375, 4, 0, 655376, 4, 0, 655377, 4, 0, 655378, 4, 0, 655379, 5, 0, 720896, 3, 0, 720897, 4, 0, 720898, 4, 0, 720899, 4, 0, 720900, 4, 0, 720901, 4, 0, 720902, 4, 0, 720903, 4, 0, 720904, 4, 0, 720905, 4, 0, 720906, 5, 0, 720909, 3, 0, 720910, 4, 0, 720911, 4, 0, 720912, 4, 0, 720913, 4, 0, 720914, 4, 0, 720915, 5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="fighter" parent="." instance=ExtResource( 3 )]
+position = Vector2( 120, 256 )
+
+[node name="agujero" parent="." instance=ExtResource( 1 )]
+visible = false
+modulate = Color( 1, 1, 1, 1 )
+light_mask = 3
+position = Vector2( 352, 421.059 )
+scale = Vector2( 12650.4, 2.31616 )
+next_world = "res://scenes/world1.tscn"
+
+[node name="enemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 544, 266.139 )
