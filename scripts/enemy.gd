@@ -11,7 +11,7 @@ func _process(delta):
 		input_p2()
 	
 	if _is_hit():
-		damage(10)
+		damage(2)
 		#print(health)
 	#$effects.stop()
 	pass
