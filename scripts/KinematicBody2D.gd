@@ -19,6 +19,8 @@ export (float) var max_health = 100
 export (bool) var movement = true
 
 onready var health = max_health setget _set_health
+onready var animator = $anim_player
+
 var die = false
 
 func _ready():
@@ -27,46 +29,47 @@ func _ready():
 func input_p1():
 	#$sprite_col.disabled = false
 	var friction = false
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right") && !attacking:
 		
 		motion.x = min(motion.x+ACCELERATION, MAX_SPEED)
 		$sprite.flip_h = false
 		$hitbox.scale.x = 1
-		$anim_player.play("run", 1, 4)
+		animator.play("run", 1, 4)
 	
-	elif Input.is_action_pressed("ui_left"):
+	elif Input.is_action_pressed("ui_left") && !attacking:
 		
 		motion.x = max(motion.x-ACCELERATION, -MAX_SPEED)
 		$sprite.flip_h = true
 		$hitbox.scale.x = -1
-		$anim_player.play("run", 1, 2)
+		animator.play("run", 1, 2)
 	
-	elif Input.is_action_just_pressed("attack1"):
-			attacking = true
-			#motion.x = 1000
-			$anim_player.play("attack")
-			yield($anim_player, "animation_finished")
-			#attack()
-			friction = true
-			
-	
-	elif Input.is_action_pressed("attack2"):
+	elif Input.is_action_just_pressed("attack1") && !attacking:
 		attacking = true
-		$anim_player.play("attack2", 1, 8)
 		friction = true
+		animator.play("attack", 1, 3)
+		yield(animator, "animation_finished")
+		attacking = false
 	
-	elif Input.is_action_just_pressed("dash"):
+	elif Input.is_action_just_pressed("attack2") && !attacking:
+		attacking = true
+		friction = true
+		animator.play("attack2", 1, 3)
+		yield(animator, "animation_finished")
+		attacking = false
+		
+	
+	elif Input.is_action_just_pressed("dash") && !attacking:
 		if $sprite.flip_h:
 			motion.x = -1000
 		else:
 			motion.x = 1000
 		
-		$anim_player.play("dash")
+		animator.play("dash")
 		
 		
-	else:
+	elif !attacking:
 	#elif Input.is_action_just_released("ui_left") || Input.is_action_just_released("ui_right") || Input.is_action_just_released("attack") || !jumping:
-		$anim_player.play("idle")
+		animator.play("idle")
 		friction = true
 		
 	if is_on_floor():
@@ -79,9 +82,9 @@ func input_p1():
 	else:
 		if motion.y != 0:
 			if !die:
-				$anim_player.play("jump")
+				animator.play("jump")
 			else:
-				$anim_player.play("die")
+				animator.play("die")
 				$sprite_col.disabled = true
 		else:
 			jumping = false
@@ -89,43 +92,49 @@ func input_p1():
 	motion = move_and_slide(motion, UP)
 
 func input_p2():
+	#$sprite_col.disabled = false
 	var friction = false
-	if Input.is_action_pressed("p2_right"):
+	if Input.is_action_pressed("p2_right") && !attacking:
 		
 		motion.x = min(motion.x+ACCELERATION, MAX_SPEED)
 		$sprite.flip_h = false
 		$hitbox.scale.x = 1
-		$anim_player.play("run", 1, 4)
+		animator.play("run", 1, 4)
 	
-	elif Input.is_action_pressed("p2_left"):
+	elif Input.is_action_pressed("p2_left") && !attacking:
 		
 		motion.x = max(motion.x-ACCELERATION, -MAX_SPEED)
 		$sprite.flip_h = true
 		$hitbox.scale.x = -1
-		$anim_player.play("run", 1, 2)
+		animator.play("run", 1, 2)
 	
-	elif Input.is_action_pressed("p2_attack1"):
+	elif Input.is_action_just_pressed("p2_attack1") && !attacking:
 		attacking = true
-		$anim_player.play("attack", 1, 8)
 		friction = true
+		animator.play("attack", 1, 3)
+		yield(animator, "animation_finished")
+		attacking = false
 	
-	elif Input.is_action_pressed("p2_attack2"):
+	elif Input.is_action_just_pressed("p2_attack2") && !attacking:
 		attacking = true
-		$anim_player.play("attack2", 1, 8)
 		friction = true
+		animator.play("attack2", 1, 3)
+		yield(animator, "animation_finished")
+		attacking = false
+		
 	
-	elif Input.is_action_just_pressed("p2_dash"):
+	elif Input.is_action_just_pressed("p2_dash") && !attacking:
 		if $sprite.flip_h:
 			motion.x = -1000
 		else:
 			motion.x = 1000
 		
-		$anim_player.play("dash")
+		animator.play("dash")
 		
 		
-	else:
+	elif !attacking:
 	#elif Input.is_action_just_released("ui_left") || Input.is_action_just_released("ui_right") || Input.is_action_just_released("attack") || !jumping:
-		$anim_player.play("idle")
+		animator.play("idle")
 		friction = true
 		
 	if is_on_floor():
@@ -134,12 +143,13 @@ func input_p2():
 			jumping = true
 		if friction:
 			motion.x = lerp(motion.x, 0, 0.2)
+	
 	else:
 		if motion.y != 0:
 			if !die:
-				$anim_player.play("jump")
+				animator.play("jump")
 			else:
-				$anim_player.play("die")
+				animator.play("die")
 				$sprite_col.disabled = true
 		else:
 			jumping = false
@@ -152,10 +162,6 @@ func kill():
 	motion.y = -300
 	#$sprite_col.disabled = true
 	pass
-
-func attack():
-	$anim_player.current_animation = "attack1"
-	yield($anim_player, "animation_finished")
 
 func damage(amount):
 	_set_health(health - amount)
