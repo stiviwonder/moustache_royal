@@ -64,7 +64,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "attack2"
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
