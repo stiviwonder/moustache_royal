@@ -2,7 +2,7 @@ extends "KinematicBody2D.gd"
 
 func _ready():
 	add_to_group("player")
-
+	#get_owner().connect("attack", self, damage)
 
 func _process(delta):
 	motion.y += GRAVITY
